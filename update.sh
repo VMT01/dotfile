@@ -1,7 +1,9 @@
 # Copy nvim configs
 rm -rf ./config/nvim
-yes | cp -rf ~/.config/nvim ./config
+mkdir -p ./config/nvim
+yes | cp -rf ~/.config/nvim/* ./config/nvim
 
 # Copy alacritty configs
 rm -rf ./config/alacritty
-yes | cp -rf ~/.config/alacritty ./config
+mkdir -p ./config/alacritty
+yes | cp -rf ~/.config/alacritty/* ./config/alacritty
