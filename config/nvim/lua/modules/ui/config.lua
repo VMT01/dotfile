@@ -3,23 +3,23 @@ local config = {}
 function config.catppuccin()
 	require("catppuccin").setup({
 		flavour = "macchiato", -- latte, frappe, macchiato, mocha
-		background = { -- :h background
+		background = {       -- :h background
 			light = "latte",
 			dark = "mocha",
 		},
 		transparent_background = false, -- disables setting the background color.
-		show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
-		term_colors = false, -- sets terminal colors (e.g. `g:terminal_color_0`)
+		show_end_of_buffer = false,   -- shows the '~' characters after the end of buffers
+		term_colors = false,          -- sets terminal colors (e.g. `g:terminal_color_0`)
 		dim_inactive = {
-			enabled = false, -- dims the background color of inactive window
+			enabled = false,            -- dims the background color of inactive window
 			shade = "dark",
-			percentage = 0.15, -- percentage of the shade to apply to the inactive window
+			percentage = 0.15,          -- percentage of the shade to apply to the inactive window
 		},
-		no_italic = false, -- Force no italic
-		no_bold = false, -- Force no bold
-		no_underline = false, -- Force no underline
-		styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
-			comments = { "italic" }, -- Change the style of comments
+		no_italic = false,            -- Force no italic
+		no_bold = false,              -- Force no bold
+		no_underline = false,         -- Force no underline
+		styles = {                    -- Handles the styles of general hi groups (see `:h highlight-args`):
+			comments = { "italic" },    -- Change the style of comments
 			conditionals = { "italic" },
 			loops = {},
 			functions = {},
@@ -86,7 +86,7 @@ function config.bufferline()
 			diagnostics = "nvim_lsp",
 			diagnostics_indicator = function(_, _, diag)
 				local ret = (diag.error and " " .. diag.error .. " " or "")
-					.. (diag.warning and " " .. diag.warning or "")
+						.. (diag.warning and " " .. diag.warning or "")
 				return vim.trim(ret)
 			end,
 			color_icons = true,
@@ -155,23 +155,23 @@ end
 
 function config.cinnamon()
 	require("cinnamon").setup({
-		-- KEYMAPS:
-		default_keymaps = true, -- Create default keymaps.
-		extra_keymaps = true, -- Create extra keymaps.
-		extended_keymaps = false, -- Create extended keymaps.
-		override_keymaps = true, -- The plugin keymaps will override any existing keymaps.
-
-		-- OPTIONS:
-		always_scroll = false, -- Scroll the cursor even when the window hasn't scrolled.
-		centered = true, -- Keep cursor centered in window when using window scrolling.
 		disabled = false, -- Disables the plugin.
-		default_delay = 4, -- The default delay (in ms) between each line when scrolling.
-		hide_cursor = false, -- Hide the cursor while scrolling. Requires enabling termguicolors!
-		horizontal_scroll = true, -- Enable smooth horizontal scrolling when view shifts left or right.
-		max_length = -1, -- Maximum length (in ms) of a command. The line delay will be
-		-- re-calculated. Setting to -1 will disable this option.
-		scroll_limit = 100, -- Max number of lines moved before scrolling is skipped. Setting
-		-- to -1 will disable this option.
+		keymaps = {
+			basic = true, -- Enable the provided 'basic' keymaps
+			extra = true, -- Enable the provided 'extra' keymaps
+		},
+
+		options = {
+			-- The scrolling mode
+			-- `cursor`: Smoothly scrolls the cursor for any movement
+			-- `window`: Smoothly scrolls the window ONLY when the cursor moves out of view
+			mode = "window",
+			delay = 4, -- The default delay (in ms) between each line when scrolling.
+			max_delta = {
+				time = 1000, -- Maximum duration for a movement (in ms). Automatically adjusts the step delay
+				line = 100, -- Maximum distance for line movements. Set to `nil` to disable
+			},
+		},
 	})
 end
 

@@ -9,7 +9,7 @@ function config.nvim_cmp()
 	luasnip.config.setup({})
 	luasnip.filetype_extend("all", { "-" })
 	luasnip.filetype_extend("lua", { "all" })
-	luasnip.filetype_extend("javascript", { "jsdoc" }) -- TODO: Check this out
+	luasnip.filetype_extend("javascript", { "jsdoc" })
 
 	cmp.setup({
 		preselect = "item",
@@ -133,6 +133,7 @@ function config.none_ls()
 			--[[ DIAGNOSTICS ]]
 			diagnostics.checkmake, -- make linter.
 			diagnostics.cmake_lint, -- Check cmake listfiles for style violations, common mistakes, and anti-patterns.
+			diagnostics.golangci_lint, -- A Go linter aggregator.
 			diagnostics.markdownlint_cli2, -- A fast, flexible, configuration-based command-line interface for linting Markdown/CommonMark files with the markdownlint library
 			diagnostics.mypy, -- Mypy is an optional static type checker for Python that aims to combine the benefits of dynamic (or "duck") typing and static typing.
 			diagnostics.pylint, -- Pylint is a Python static code analysis tool which looks for programming errors, helps enforcing a coding standard, sniffs for code smells and offers simple refactoring suggestions.
@@ -146,6 +147,7 @@ function config.none_ls()
 			formatting.blackd, -- The uncompromising Python code formatter
 			formatting.cmake_format, -- Parse cmake listfiles and format them nicely.
 			formatting.isortd, -- Python utility / library to sort imports alphabetically and automatically separate them into sections and by type.
+			formatting.gofmt, -- Formats go programs.
 			formatting.prettierd, -- prettier, as a daemon, for ludicrous formatting speed.
 			formatting.prettierd.with({ filetypes = { "solidity" }, extra_args = {} }),
 			formatting.prettierd.with({
@@ -166,14 +168,15 @@ function config.mason_lspconfig()
 			"cmake",
 			"dockerls",
 			"docker_compose_language_service",
+			"gopls",
 			"graphql",
 			"jsonls",
-			"jdtls",
+			-- "jdtls",
 			"tsserver",
 			"lua_ls",
 			"move_analyzer",
 			"pyright",
-			"sqlls",
+			-- "sqlls",
 			"solidity_ls_nomicfoundation",
 			"taplo",
 			"yamlls",
@@ -193,15 +196,15 @@ function config.nvim_lspconfig()
 	lspconfig.cmake.setup({})
 	lspconfig.dockerls.setup({})
 	lspconfig.docker_compose_language_service.setup({})
+	lspconfig.gopls.setup({})
 	lspconfig.graphql.setup({})
 	lspconfig.jsonls.setup({})
-	lspconfig.jdtls.setup({})
+	-- lspconfig.jdtls.setup({})
 	lspconfig.tsserver.setup({})
 	lspconfig.lua_ls.setup({})
 	lspconfig.move_analyzer.setup({})
 	lspconfig.pyright.setup({})
-	-- lspconfig.rust_analyzer.setup({})
-	lspconfig.sqlls.setup({})
+	-- lspconfig.sqlls.setup({})
 	lspconfig.solidity_ls_nomicfoundation.setup({})
 	lspconfig.taplo.setup({})
 	lspconfig.yamlls.setup({})
@@ -213,9 +216,8 @@ end
 
 function config.crates()
 	local crates = require("crates")
-	crates.setup()
+	crates.setup({})
 	crates.show()
-	-- vim.keymap.set("n", "<leader>uc", crates.upgrade_all_crates, {})
 end
 
 return config
