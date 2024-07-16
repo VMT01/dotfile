@@ -1,3 +1,21 @@
+dots=(
+  alacritty
+  nvim
+)
+
+for DIR in ${dots[@]}; do
+  DIRPATH=~/.config/"$DIR"
+  if [ -d $DIRPATH ]; then
+    echo -e "Config for $DIR found, attempting to backup"
+    BACKUP_DIR="backup-$(date +%m%d_%H%M%S)_$DIR"
+    mv $DIRPATH $BACKUP_DIR
+    echo "Backup $DIR to $BACKUP_DIR done"
+  fi
+done
+
+mkdir -p ~/.config
+cp -r config/* ~/.config/
+
 # echo "-> Install dependencies for Nvim clipboard..."
 # yes | sudo apt-get install xclip
 
@@ -14,3 +32,4 @@
 # tar xf lazygit.tar.gz lazygit
 # yes | sudo install lazygit /usr/local/bin
 # rm -rf lazygit.tar.gz lazygit
+
